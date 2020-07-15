@@ -16,18 +16,8 @@
 
 package org.springframework.web.method;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringJoiner;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.BridgeMethodResolver;
 import org.springframework.core.MethodParameter;
@@ -41,6 +31,15 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Encapsulates information about a handler method consisting of a
@@ -64,22 +63,28 @@ public class HandlerMethod {
 	/** Logger that is available to subclasses. */
 	protected final Log logger = LogFactory.getLog(getClass());
 
+	// 可以是某个具体的Bean, 也可以是某个Bean的Name
 	private final Object bean;
 
 	@Nullable
 	private final BeanFactory beanFactory;
 
+	// 被调用方法（指的是Controller中的方法）所属的类
 	private final Class<?> beanType;
 
+	// 被调用的方法本身
 	private final Method method;
 
 	private final Method bridgedMethod;
 
+	// 方法参数
 	private final MethodParameter[] parameters;
 
+	// http状态码
 	@Nullable
 	private HttpStatus responseStatus;
 
+	// http状态码的产生原因
 	@Nullable
 	private String responseStatusReason;
 

@@ -177,6 +177,10 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
 		this(paths, clazz, null);
 	}
 
+
+	/**
+	 * 所有的构造方法都会调用该构造方法
+	 */
 	/**
 	 * Create a new ClassPathXmlApplicationContext with the given parent,
 	 * loading the definitions from the given XML files and automatically
